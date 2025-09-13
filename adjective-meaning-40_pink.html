@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kru Pai Classroom — Adjective Meaning Game (40) • Pink Theme</title>
+<style>
+  :root{
+    --bg1:#fff5f8;
+    --bg2:#ffe6ef;
+    --ink:#4a1633;
+    --muted:#a85574;
+    --primary:#d81b60;
+    --accent:#f06292;
+    --good:#2e7d32;
+    --bad:#c62828;
+    --card:#ffffff;
+    --shadow:0 10px 30px rgba(216,27,96,.12);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;color:var(--ink);
+       background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%);min-height:100vh;}
+  header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;
+         position:sticky;top:0;z-index:5;background:rgba(255,245,248,.75);
+         backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid #ffd1df;}
+  .brand{display:flex;gap:10px;align-items:center;font-weight:800;color:var(--primary);}
+  .brand .mark{width:38px;height:38px;border-radius:12px;background:var(--primary);
+               display:grid;place-items:center;color:#fff;box-shadow:var(--shadow);font-weight:900;}
+  .container{max-width:980px;margin:26px auto;padding:0 16px 60px;}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:18px 0;}
+  h1,h2,h3{margin:8px 0 14px} h1{font-size:clamp(24px,3.2vw,34px);color:var(--primary)}
+  h2{font-size:clamp(20px,2.4vw,26px);color:var(--accent)} p{line-height:1.6}
+  label{display:block;margin:10px 0;padding:12px 14px;border:1.5px solid #ffd1df;border-radius:12px;cursor:pointer;font-size:18px}
+  input[type="radio"]{accent-color:var(--accent);transform:scale(1.2);margin-right:8px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:14px;border:0;
+       background:var(--primary);color:#fff;font-weight:700;box-shadow:0 8px 18px rgba(216,27,96,.18);cursor:pointer;transition:transform .05s ease;font-size:16px}
+  .btn:active{transform:translateY(1px)} .btn.secondary{background:var(--accent)} .btn.ghost{background:#fff;color:var(--primary);border:2px solid #ffd1df}
+  .btn.danger{background:var(--bad)} .btn.good{background:var(--good)}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap}
+  .muted{color:var(--muted);font-size:14px} .big{font-size:20px} .center{text-align:center}
+  .hidden{display:none !important}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#ffe6ef;border:1px solid #ffd1df;color:var(--primary);
+         padding:8px 12px;border-radius:999px;font-weight:600;}
+  .scoreboard{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#ffe6ef;border:1px solid #ffd1df;border-radius:14px;
+              padding:10px 14px;margin-bottom:10px;font-weight:700;color:var(--primary)}
+  .question{font-size:22px;margin-bottom:8px}
+  .footer-note{text-align:center;color:#c77e96;margin-top:22px;font-size:14px}
+  .grid-2{display:grid;grid-template-columns:1fr;gap:16px}
+  @media (min-width:860px){.grid-2{grid-template-columns:1.1fr .9fr}}
+  .list{margin:0;padding-left:18px} .list li{margin:6px 0}
+  table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;border:1px solid #ffd1df}
+  th,td{padding:10px 12px;border-bottom:1px solid #ffe6ef}
+  th{background:#ffe6ef;color:var(--primary);text-align:left}
+  tr:last-child td{border-bottom:none}
+  .vocab-grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:860px){.vocab-grid{grid-template-columns:1fr 1fr}}
+  .timer{
+    display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;
+    background:#fff;border:2px solid #ffd1df;color:var(--primary);font-weight:800;
+  }
+  .timer.low{border-color:#f9a8d4;color:#b91c1c}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="mark">KP</div>
+    <div>
+      Kru Pai Classroom<br/><span class="muted">Adjective Meaning — Pink Edition 🌸</span>
+    </div>
+  </div>
+  <div class="badge">ไม่มีเสียง • จับเวลา 7 วิ/ข้อ</div>
+</header>
+
+<div class="container">
+
+  <!-- START -->
+  <section id="screen-start" class="card">
+    <h1 class="center">🌸 เกมความหมายคำคุณศัพท์ (40 คำ) 🌸</h1>
+    <p class="center big">กรอกชื่อ → ทบทวนคำศัพท์ 40 คำ → เริ่มเกม 40 ข้อ (⏱️ 7 วิ/ข้อ)</p>
+    <div class="card">
+      <label>ชื่อผู้เล่น
+        <input id="playerName" type="text" placeholder="เช่น Nam, Mint, Top" style="width:100%;padding:12px 14px;margin-top:6px;border-radius:12px;border:1.5px solid #ffd1df;font-size:18px">
+      </label>
+      <div class="toolbar">
+        <button class="btn secondary" onclick="goVocab()">🧠 ไปทบทวนคำศัพท์ (40 คำ)</button>
+      </div>
+    </div>
+    <div class="footer-note">© Kru Pai Classroom • Pink Theme • ทำด้วยความรัก 💖</div>
+  </section>
+
+  <!-- VOCAB GATE -->
+  <section id="screen-vocab" class="card hidden">
+    <h2>🧠 Vocabulary Gate — คำศัพท์ที่ควรรู้ (40 คำ)</h2>
+    <p class="muted">*คำอ่านไทยเป็นการถอดเสียงโดยประมาณ เพื่อช่วยให้ออกเสียงง่ายขึ้น</p>
+    <div class="vocab-grid">
+      <div class="card">
+        <table>
+          <thead><tr><th>English</th><th>คำอ่านไทย</th><th>คำแปล</th></tr></thead>
+          <tbody id="vocabCol1"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th>English</th><th>คำอ่านไทย</th><th>คำแปล</th></tr></thead>
+          <tbody id="vocabCol2"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="toolbar" style="margin-top:10px">
+      <button class="btn ghost" onclick="backToStart()">⬅️ ย้อนกลับ</button>
+      <button class="btn" onclick="goRules()">📋 ไปดูกติกาก่อนเล่น</button>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section id="screen-rules" class="card hidden">
+    <h2>📋 กติกาเกมเลือกความหมาย</h2>
+    <ul class="list">
+      <li>เกมมี <b>40 ข้อ</b> แต่ละข้อมีเวลา <b>7 วินาที</b></li>
+      <li>อ่านคำคุณศัพท์ภาษาอังกฤษ แล้วเลือก <b>คำแปลไทยที่ถูกต้อง</b></li>
+      <li>เวลาเป็นศูนย์ = นับว่า <b>ผิด</b> และไปข้อถัดไป</li>
+      <li>เกณฑ์ผ่าน: <b>80%</b> (อย่างน้อย 32 คะแนน)</li>
+      <li>กติกาดูเฉลย: <b>ผ่านครั้งแรก</b> → ดูเฉลยได้เลย / ถ้า <b>ไม่ผ่าน</b> ต้องเล่นอีกรอบก่อนถึงจะดูเฉลยได้</li>
+    </ul>
+    <div class="toolbar">
+      <button class="btn ghost" onclick="backToStart()">⬅️ ย้อนกลับ</button>
+      <button class="btn" onclick="startGame()">▶️ เริ่มเล่น 40 ข้อ</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="screen-quiz" class="hidden">
+    <div class="scoreboard">
+      <div>ผู้เล่น: <span id="playerLabel">-</span></div>
+      <div>ข้อ: <span id="qIndex">1</span>/<span id="qTotal">40</span></div>
+      <div class="timer" id="timer">⏱️ 7</div>
+    </div>
+    <div class="card">
+      <div class="question" id="qText">❓ ...</div>
+      <div id="options"></div>
+      <div class="toolbar" style="margin-top:8px">
+        <button class="btn secondary" onclick="nextQuestion()">ถัดไป ▶️</button>
+      </div>
+      <div class="muted">* เลือกคำตอบก่อน แล้วกด “ถัดไป” หรือรอเวลา</div>
+    </div>
+    <div class="toolbar">
+      <button class="btn ghost" onclick="confirmQuit()">🏠 กลับหน้าแรก</button>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="screen-result" class="card hidden">
+    <h2 class="center">🎉 สรุปคะแนน 🏆</h2>
+    <div class="card center">
+      <p class="big">คะแนนของ <b id="playerFinal">-</b></p>
+      <p class="big">ได้ <b id="scoreNum">0</b> / <b id="scoreDen">40</b>  (<b id="scorePct">0%</b>)</p>
+      <p id="passNote" class="big" style="font-weight:800;color:var(--good)">ผ่าน 🌟 เก่งมาก!</p>
+      <p id="failNote" class="big hidden" style="font-weight:800;color:var(--bad)">ยังไม่ผ่าน (เกณฑ์ 80%) 💪</p>
+    </div>
+    <div class="toolbar center" style="justify-content:center;margin-top:6px">
+      <button class="btn" onclick="retryGame()">🔁 เล่นใหม่</button>
+      <button class="btn ghost" onclick="backToStart()">🏠 กลับหน้าแรก</button>
+      <button id="viewAnsBtn" class="btn danger hidden" onclick="showAnswers()">📗 ดูเฉลย</button>
+    </div>
+    <p class="muted center" id="attemptInfo"></p>
+    <p class="muted center">🌸 สู้ ๆ นะ เด็ก ๆ ทำได้! 🌸</p>
+  </section>
+
+  <!-- ANSWERS -->
+  <section id="screen-answers" class="card hidden">
+    <h2>📗 เฉลยคำศัพท์ 40 คำ</h2>
+    <ol id="answerList"></ol>
+    <div class="toolbar">
+      <button class="btn" onclick="backToStart()">🏠 กลับหน้าแรก</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const PASS_RATE = 0.80;
+const TIME_PER_Q = 7; // seconds
+let player = "";
+let current = 0;
+let selections = [];
+let attemptsMade = 0;
+let everFailed = false;
+let correctCount = 0;
+let timerId = null;
+let timeLeft = TIME_PER_Q;
+
+// 40 adjectives with Thai reading and meaning
+const VOCABS = [
+  ["big","บิ๊ก","ใหญ่"], ["small","สมอล","เล็ก"],
+  ["tall","ทอล","สูง"], ["short","ชอร์ต","เตี้ย / สั้น"],
+  ["fat","แฟท","อ้วน"], ["thin","ธิน","ผอม"],
+  ["hot","ฮอต","ร้อน"], ["cold","โคลด์","เย็น"],
+  ["fast","ฟาสท์","เร็ว"], ["slow","สโลว์","ช้า"],
+  ["good","กู๊ด","ดี"], ["bad","แบด","แย่"],
+  ["happy","แฮปปี","มีความสุข"], ["sad","แซด","เศร้า"],
+  ["young","ยัง","อายุน้อย"], ["old","โอลด์","แก่ / เก่า"],
+  ["beautiful","บิวทิฟูล","สวย"], ["ugly","อักลี","ขี้เหร่"],
+  ["cheap","ชีพ","ถูก"], ["expensive","เอ็กซ์เพนซิฟ","แพง"],
+  ["clean","คลีน","สะอาด"], ["dirty","เดอร์ที","สกปรก"],
+  ["strong","สตรอง","แข็งแรง"], ["weak","วีค","อ่อนแอ"],
+  ["brave","เบรฟ","กล้าหาญ"], ["kind","ไคนด์","ใจดี"],
+  ["polite","โพไลท์","สุภาพ"], ["rude","รูด","หยาบคาย"],
+  ["funny","ฟันนี","ตลก"], ["boring","โบริง","น่าเบื่อ"],
+  ["interesting","อินเทอะเรสทิง","น่าสนใจ"], ["noisy","นอยซี","เสียงดัง"],
+  ["quiet","ไควเอ็ท","เงียบ"], ["hungry","ฮัง-กรี","หิว"],
+  ["thirsty","เธิส-ตี","กระหายน้ำ"], ["tired","ไทเออะด","เหนื่อย"],
+  ["lazy","เลซี","ขี้เกียจ"], ["hard-working","ฮาร์ด-เวิร์คกิง","ขยัน"],
+  ["healthy","เฮลธี","สุขภาพดี"], ["sick","ซิก","ป่วย"]
+];
+
+const QUESTIONS = VOCABS.map(v => ({ word: v[0], meaning: v[2] }));
+
+function $(id){return document.getElementById(id)}
+function show(id){$(id).classList.remove("hidden")}
+function hide(id){$(id).classList.add("hidden")}
+function switchTo(ids){["screen-start","screen-vocab","screen-rules","screen-quiz","screen-result","screen-answers"].forEach(hide); ids.forEach(show);}
+function backToStart(){stopTimer(); switchTo(["screen-start"]);}
+
+function goVocab(){
+  // Render vocab table (split two columns)
+  const half = Math.ceil(VOCABS.length/2);
+  $("vocabCol1").innerHTML = VOCABS.slice(0,half).map(([en,thp,thm])=>`<tr><td>${en}</td><td>${thp}</td><td>${thm}</td></tr>`).join("");
+  $("vocabCol2").innerHTML = VOCABS.slice(half).map(([en,thp,thm])=>`<tr><td>${en}</td><td>${thp}</td><td>${thm}</td></tr>`).join("");
+  switchTo(["screen-vocab"]);
+}
+
+function goRules(){
+  const n = $("playerName").value.trim();
+  player = n || "Player";
+  $("playerLabel").textContent = player;
+  switchTo(["screen-rules"]);
+}
+
+function startGame(){
+  // reset
+  selections = Array(QUESTIONS.length).fill(null);
+  correctCount = 0;
+  current = 0;
+  $("qTotal").textContent = QUESTIONS.length;
+  renderQuestion();
+  switchTo(["screen-quiz"]);
+}
+
+function sampleOptions(correct){
+  const all = VOCABS.map(v=>v[2]);
+  const pool = all.filter(m => m!==correct);
+  // shuffle
+  for (let i = pool.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const opts = [correct, ...pool.slice(0,3)];
+  // shuffle final
+  for (let i=opts.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [opts[i], opts[j]] = [opts[j], opts[i]];
+  }
+  return opts;
+}
+
+function renderQuestion(){
+  stopTimer();
+  const q = QUESTIONS[current];
+  $("qIndex").textContent = current + 1;
+  $("qText").innerHTML = `❓ คำว่า <b>${q.word}</b> แปลว่าอะไร?`;
+  const opts = sampleOptions(q.meaning);
+  $("options").innerHTML = opts.map(opt=>{
+    const id = `opt_${current}_${opt.replace(/\\s/g,'_')}`;
+    return `<label><input type="radio" name="q${current}" value="${opt}"> ${opt}</label>`;
+  }).join("");
+  // start timer
+  timeLeft = TIME_PER_Q;
+  updateTimerView();
+  timerId = setInterval(()=>{
+    timeLeft--;
+    updateTimerView();
+    if(timeLeft<=0){
+      stopTimer();
+      autoSubmit();
+    }
+  }, 1000);
+}
+
+function updateTimerView(){
+  const t = $("timer");
+  t.textContent = `⏱️ ${timeLeft}`;
+  t.classList.toggle("low", timeLeft<=3);
+}
+
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId = null; }}
+
+function autoSubmit(){
+  // if nothing selected, mark as wrong (null) and move on
+  finalizeQuestion(null);
+  if(current < QUESTIONS.length - 1){
+    current++; renderQuestion();
+  }else{
+    finishGame();
+  }
+}
+
+function nextQuestion(){
+  // read selection
+  const radios = document.querySelectorAll(`input[name="q${current}"]`);
+  let chosen = null;
+  radios.forEach(r=>{ if(r.checked) chosen = r.value; });
+  finalizeQuestion(chosen);
+  if(current < QUESTIONS.length - 1){
+    current++; renderQuestion();
+  }else{
+    finishGame();
+  }
+}
+
+function finalizeQuestion(choice){
+  stopTimer();
+  selections[current] = choice;
+  if(choice === QUESTIONS[current].meaning){
+    correctCount++;
+  }
+}
+
+function finishGame(){
+  const pct = Math.round((correctCount/QUESTIONS.length)*100);
+  const passed = (correctCount/QUESTIONS.length) >= PASS_RATE;
+
+  attemptsMade += 1;
+  if(!passed){ everFailed = true; }
+
+  $("playerFinal").textContent = player;
+  $("scoreNum").textContent = correctCount;
+  $("scoreDen").textContent = QUESTIONS.length;
+  $("scorePct").textContent = pct + "%";
+  $("passNote").classList.toggle("hidden", !passed);
+  $("failNote").classList.toggle("hidden", passed);
+
+  // view answers rule
+  let canView = false;
+  if(attemptsMade === 1 && passed){
+    canView = true;
+  } else if (everFailed && attemptsMade >= 2){
+    canView = true;
+  }
+  $("viewAnsBtn").classList.toggle("hidden", !canView);
+
+  $("attemptInfo").textContent = canView
+    ? (attemptsMade===1 && passed
+        ? "ผ่านตั้งแต่ครั้งแรก — สามารถกดดูเฉลยได้เลย"
+        : `พยายามแล้ว ${attemptsMade} ครั้ง (เคยไม่ผ่าน) — ตอนนี้กดดูเฉลยได้`)
+    : (attemptsMade===1 && !passed
+        ? "ยังดูเฉลยไม่ได้ — ลองทำใหม่อีกครั้งก่อนนะ"
+        : "ยังดูเฉลยไม่ได้");
+
+  switchTo(["screen-result"]);
+}
+
+function retryGame(){
+  startGame(); // keep attemptsMade / everFailed as is
+}
+
+function confirmQuit(){
+  if(confirm("ยืนยันกลับหน้าแรกไหม? คะแนนรอบนี้จะไม่ถูกบันทึก")){ backToStart(); }
+}
+
+function showAnswers(){
+  const ol = $("answerList");
+  ol.innerHTML = "";
+  QUESTIONS.forEach((q,idx)=>{
+    const li = document.createElement("li");
+    const user = selections[idx] ?? "(หมดเวลา/ไม่ได้เลือก)";
+    const ok = user===q.meaning;
+    li.innerHTML = `<b>${q.word}</b> → <b>${q.meaning}</b> <br>
+      <span class="${ok?'':'muted'}">คำตอบของคุณ: <b style="color:${ok?'var(--good)':'var(--bad)'}">${user}</b></span>`;
+    ol.appendChild(li);
+  });
+  switchTo(["screen-answers"]);
+}
+</script>
+</body>
+</html>
