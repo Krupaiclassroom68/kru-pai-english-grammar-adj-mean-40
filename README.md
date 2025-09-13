@@ -1,0 +1,1 @@
+# kru-pai-english-grammar-adj-mean-40
